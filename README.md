@@ -20,19 +20,6 @@ Este projeto é um conversor de moedas baseado em uma API externa de câmbio (Ex
 - **Gson** para parseamento JSON
 - API: [ExchangeRate API](https://www.exchangerate-api.com/)
 
-## 📁 Estrutura do Projeto
-
-ConversorMoedas/
-├── src/
-│ ├── Main.java
-│ ├── BuscaValor.java
-│ ├── ChaveApi.java
-│ ├── EntradaUsuario.java
-│ ├── Moedas.java
-│ └── Calculadora.java
-├── .gitignore
-├── config.properties
-├── README.md
 
 🛡️ Tratamento de Erros
 Entradas inválidas como letras ou símbolos são detectadas e tratadas.
