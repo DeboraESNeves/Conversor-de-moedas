@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Scanner;
@@ -29,6 +28,7 @@ public class Main {
 
         int usuario = 0;
         BigDecimal valorPraConverter = BigDecimal.ZERO;
+        RealizaConversao conversor = new RealizaConversao();
 
         do {
             System.out.println("\nEscolha uma opção ou digite 7 para sair:");
@@ -47,26 +47,27 @@ public class Main {
                     leitor.next();
                 }
                 valorPraConverter = leitor.nextBigDecimal();
-            }
 
+            }
             switch (usuario) {
+
                 case 1:
-                    realizarConversao(buscaValor, "USD", "ARS", "Dólares", "Pesos Argentinos", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "USD", "ARS", "Dólares", "Pesos Argentinos", valorPraConverter);
                     break;
                 case 2:
-                    realizarConversao(buscaValor, "ARS", "USD", "Pesos Argentinos", "Dólares", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "ARS", "USD", "Pesos Argentinos", "Dólares", valorPraConverter);
                     break;
                 case 3:
-                    realizarConversao(buscaValor, "USD", "BRL", "Dólares", "Reais", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "USD", "BRL", "Dólares", "Reais", valorPraConverter);
                     break;
                 case 4:
-                    realizarConversao(buscaValor, "BRL", "USD", "Reais", "Dólares", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "BRL", "USD", "Reais", "Dólares", valorPraConverter);
                     break;
                 case 5:
-                    realizarConversao(buscaValor, "USD", "COP", "Dólares", "Pesos Colombianos", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "USD", "COP", "Dólares", "Pesos Colombianos", valorPraConverter);
                     break;
                 case 6:
-                    realizarConversao(buscaValor, "COP", "USD", "Pesos Colombianos", "Dólares", valorPraConverter);
+                    conversor.realizarConversao(buscaValor, "COP", "USD", "Pesos Colombianos", "Dólares", valorPraConverter);
                     break;
                 case 7:
                     System.out.println("Programa encerrado.");
@@ -76,20 +77,9 @@ public class Main {
                     break;
             }
         } while (usuario != 7);
+        leitor.close();
+
     }
 
-    private static void realizarConversao(BuscaValor buscaValor, String base, String destino, String nomeBase, String nomeDestino, BigDecimal valorPraConverter) {
-        try {
-            Moedas resultado = buscaValor.buscaValor(base);
-            BigDecimal taxaDeCambio = resultado.conversion_rates().get(destino);
 
-            Calculadora calculadora = new Calculadora();
-            BigDecimal valorFinal = calculadora.conversor(taxaDeCambio, valorPraConverter);
-
-            System.out.println("1 " + nomeBase + " = " + taxaDeCambio + " " + nomeDestino + ".");
-            System.out.println(valorPraConverter + " " + nomeBase + " = " + valorFinal + " " + nomeDestino + ".");
-        } catch (IOException | InterruptedException e) {
-            System.out.println("Erro ao buscar a taxa de câmbio: " + e.getMessage());
-        }
-    }
 }
